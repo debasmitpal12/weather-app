@@ -1,0 +1,77 @@
+/* InfoBox.css */
+
+/* Center the card */
+.InfoBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Card container with hover zoom effect */
+.Card-container {
+  width: 350px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.Card-container:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* Card styling */
+.MuiCard-root {
+  border-radius: 25px !important;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
+  color: #fff !important;
+  max-width: 100%;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Card image styling */
+.MuiCardMedia-root {
+  height: 220px !important;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.Card-container:hover .MuiCardMedia-root {
+  transform: scale(1.1);
+}
+
+/* Overlay for better text readability */
+.MuiCardMedia-root::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+}
+
+/* Typography */
+.MuiTypography-h5 {
+  font-weight: 800 !important;
+  font-size: 1.8rem;
+  text-align: center;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+  margin-top: 10px;
+}
+
+.MuiTypography-body2 {
+  color: #f1f1f1 !important;
+  line-height: 1.6;
+  font-size: 1rem;
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+  margin-top: 10px;
+}
+
+/* Card content */
+.MuiCardContent-root {
+  padding: 15px !important;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(5px);
+  border-radius: 0 0 25px 25px;
+}
