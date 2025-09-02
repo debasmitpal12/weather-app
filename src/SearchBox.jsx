@@ -4,52 +4,47 @@ import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import './SearchBox.css';
 
-export function SearchBox({ updateWeatherInfo }) {  
-  let [city, setCity] = useState("");
+export function SearchBox({ updateWeatherInfo }) {
+  const [city, setCity] = useState("");
 
   const API_URL = "http://api.weatherapi.com/v1/current.json";
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
- // your WeatherAPI key
 
-  let fetchWeather = async (city) => {
+  const fetchWeather = async (cityName) => {
     try {
-      let response = await fetch(`${API_URL}?key=${API_KEY}&q=${city}`);
-      let data = await response.json();
-      console.log(data);
+      if (!cityName) return;
+
+      const response = await fetch(`${API_URL}?key=${API_KEY}&q=${cityName}`);
+      const data = await response.json();
 
       if (data.error) {
         alert("City not found!");
-        return null;
-      } else {
-        // 
-        const info = {
-          city: data.location.name,
-          temp_c: data.current.temp_c,
-          heatindex_c: data.current.feelslike_c, 
-          wind_kph: data.current.wind_kph,
-          humidity: data.current.humidity,
-          condition: data.current.condition.text,
-        };
-
-        // 
-        updateWeatherInfo(info);
-
-        return info;
+        return;
       }
+
+      const info = {
+        city: data.location.name,
+        temp_c: data.current.temp_c,
+        heatindex_c: data.current.feelslike_c,
+        wind_kph: data.current.wind_kph,
+        humidity: data.current.humidity,
+        condition: data.current.condition.text,
+      };
+
+      // Pass data to parent
+      updateWeatherInfo(info);
+
     } catch (error) {
       console.error(error);
-      return null;
     }
   };
 
-  let handleChange = (e) => {
-    setCity(e.target.value);
-  };
+  const handleChange = (e) => setCity(e.target.value);
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetchWeather(city);
-    setCity(""); // clear input after submit
+    await fetchWeather(city); // wait for fetch to complete
+    setCity(""); // clear input AFTER fetch
   };
 
   return (
