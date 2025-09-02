@@ -8,7 +8,8 @@ export function SearchBox({ updateWeatherInfo }) {
   let [city, setCity] = useState("");
 
   const API_URL = "http://api.weatherapi.com/v1/current.json";
-  const API_KEY = "3935c4b0f811401cad0142702250209"; // your WeatherAPI key
+  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+ // your WeatherAPI key
 
   let fetchWeather = async (city) => {
     try {
